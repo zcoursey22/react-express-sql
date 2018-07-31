@@ -7,7 +7,7 @@ const port = process.env.PORT || 9999
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/park', (req, res) => {
+app.get('/parks', (req, res) => {
   apiHandler.getPark(req.query.parkCode, (data) => {
     res.send(data);
   });

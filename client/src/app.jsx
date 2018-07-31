@@ -10,14 +10,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      currentPark: this.getRandomPark()
-    });
+    this.getRandomPark();
   }
 
   getRandomPark() {
-    $.get('/park', {parkCode: 'yose'}, (data) => {
-      console.log(data);
+    $.get('/parks', {parkCode: 'ever'}, (data) => {
+      this.setState({
+        currentPark: JSON.parse(data).data[0]
+      }, () => console.log(this.state.currentPark))
     });
   }
 
@@ -26,7 +26,11 @@ class App extends React.Component {
   }
 
   render() {
-    return <p>Hello NPS App</p>
+    if (this.state.currentPark) {
+      return <p>{this.state.currentPark.fullName}</p>
+    } else {
+      return <p></p>
+    }
   }
 }
 
